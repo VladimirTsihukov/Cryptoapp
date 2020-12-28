@@ -2,6 +2,8 @@ package com.adnroidapp.cryptoapp.pojo
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.adnroidapp.cryptoapp.api.ApiFactory.BASE_IMAGE_URL
+import com.adnroidapp.cryptoapp.utils.convertTimestampToTime
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
@@ -188,4 +190,12 @@ data class CoinPriceInfo(
     @SerializedName("IMAGEURL")
     @Expose
     val imageUrl: String?,
-)
+) {
+    fun getFormattedTime() : String {
+        return convertTimestampToTime(lastUpDate?.toLong())
+    }
+
+    fun getFullImageUrl() : String {
+        return BASE_IMAGE_URL + imageUrl
+    }
+}

@@ -9,7 +9,6 @@ import com.adnroidapp.cryptoapp.database.AppDatabase
 import com.adnroidapp.cryptoapp.pojo.CoinPriceInfo
 import com.adnroidapp.cryptoapp.pojo.CoinPriceInfoRawData
 import com.google.gson.Gson
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -42,7 +41,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
             .retry()                                                            //повторно выполнит загрузку если все произошло не успешно
             .subscribeOn(Schedulers.io())
             .subscribe({
-                db.coinPriceInfoDao().insertPriceList(it)
+                db.coinPriceInfoDao().insertPriceList(it)                       //обновляет список данных
                 Log.d(TAG, "Success: $it")
             }, {
                 Log.d(TAG, "Failure: ${it.message.toString()}")
