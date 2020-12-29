@@ -2,13 +2,11 @@ package com.adnroidapp.cryptoapp
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.adnroidapp.cryptoapp.adapter.AdapterCoinList
 import com.adnroidapp.cryptoapp.pojo.CoinPriceInfo
-
 
 class CoinPriceListActivity : AppCompatActivity() {
 
@@ -24,7 +22,8 @@ class CoinPriceListActivity : AppCompatActivity() {
 
         adapter.onCoinClickListener = object : AdapterCoinList.OnCoinClickListener {
             override fun coinClick(coinPriceInfo: CoinPriceInfo) {
-                Log.d("ON_CLICK_TEST", coinPriceInfo.fromSymBol)
+                val intent = CoinDetailActivity.newIntent(this@CoinPriceListActivity, coinPriceInfo.fromSymBol)
+                startActivity(intent)
             }
         }
 
